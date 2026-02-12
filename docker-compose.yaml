@@ -1,0 +1,43 @@
+services:
+  proxmox-metrics:
+    build: .
+    restart: always
+    environment:
+      MONGO_URL: ${MONGO_URL}
+      MONGO_COLLECTION: ${MONGO_COLLECTION}
+      MONGO_TIMEOUT: ${MONGO_TIMEOUT}
+      MONGO_HISTORY_DAYS: ${MONGO_HISTORY_DAYS}
+      LOG_LEVEL: ${LOG_LEVEL}
+    ports:
+      - 8080:8080
+  mongo:
+    image: mongo:8.2.4
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+    ports:
+      - 27017:27017
+    volumes:
+      - ${PWD}/docker/cfg/mongo/init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ${PWD}/docker/data/mongo:/data/db
+  prometheus:
+    image: prom/prometheus:latest
+    user: "${UID}:${GID}"
+    command:
+      - "--storage.tsdb.retention.time=31d"
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus/"
+    volumes:
+      - ${PWD}/docker/cfg/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ${PWD}/docker/data/prometheus:/prometheus
+    restart: always
+  grafana:
+    image: grafana/grafana:latest
+    user: "${UID}:${GID}"
+    ports:
+      - 3000:3000
+    volumes:
+      - ${PWD}/docker/cfg/grafana/datasources:/etc/grafana/provisioning/datasources/
+      - ${PWD}/docker/data/grafana:/var/lib/grafana

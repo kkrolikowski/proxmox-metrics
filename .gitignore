@@ -1,0 +1,5 @@
+.venv
+.envrc
+.DS_Store
+**/__pycache__/
+doc/_build
