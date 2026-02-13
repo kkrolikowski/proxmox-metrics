@@ -1,0 +1,40 @@
+name: Python Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+      - develop
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.14'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Validate Python syntax
+      run: |
+        python -m py_compile app/main.py
+        find app -name "*.py" -exec python -m py_compile {} \;
+    
+    - name: Test imports
+      run: |
+        cd app
+        python -c "import sys; sys.path.insert(0, '.'); import db.mongo; import handlers.handlers; import metrics.prometheus; import parsers.proxmox_report; print('All imports successful')"
