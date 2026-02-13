@@ -15,7 +15,7 @@ Those data are gathered by prometheus in the form of metrics.
 | MONGO_HISTORY_DAYS | 7       | Control how old data will be tructated                |
 | LOG_LEVEL          | INFO    | Log level                                             |
 
-> [!TIP] Database 
+> [!TIP]
 > There's no need to maintain long history in metrics data. Proxmox Metrics service picks only the latest data on prometheus request
 
 ## Application endpoints
