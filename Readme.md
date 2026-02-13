@@ -1,7 +1,5 @@
 # Proxmox Metrics
 
-[[_TOC_]]
-
 Proxmox Metrics is a tool designed to work with Proxmox notifications facility and Prometheus. This tool recieves data from proxmox and collects them in Mongo database.
 Those data are gathered by prometheus in the form of metrics.
 
