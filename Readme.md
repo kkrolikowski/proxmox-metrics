@@ -15,6 +15,7 @@ Those data are gathered by prometheus in the form of metrics.
 | MONGO_HISTORY_DAYS | 7       | Control how old data will be tructated                |
 | LOG_LEVEL          | INFO    | Log level                                             |
 
+> [!TIP] Database 
 > There's no need to maintain long history in metrics data. Proxmox Metrics service picks only the latest data on prometheus request
 
 ## Application endpoints
@@ -62,7 +63,8 @@ This guide assumes that you have configured proxmox metrics webhook in proxmox n
 4. Run backup job and wait for completed status.
 5. Wait 5-10 min. and issue: http://your-docker-host:3000/ to enter grafana interface
 
-> **IMPORTANT:** If you change MONGO_INITDB_DATABASE variable, remember to adjust settings in `docker/cfg/mongo/init.js` accordingly.
+> [!IMPORTANT]
+> If you change MONGO_INITDB_DATABASE variable, remember to adjust settings in `docker/cfg/mongo/init.js` accordingly.
 
 ## Grafana dashboard
 
