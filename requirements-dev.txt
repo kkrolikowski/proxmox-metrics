@@ -1,0 +1,4 @@
+pytest
+pytest-asyncio
+aiohttp[test_utils]
+pytest-cov
