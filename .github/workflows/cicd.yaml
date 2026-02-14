@@ -40,7 +40,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: test-results
-          path: tests/test-results.xml
+          path: tests
       - name: List dir
         run: |
           ls -la
