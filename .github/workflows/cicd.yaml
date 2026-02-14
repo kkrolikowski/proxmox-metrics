@@ -12,7 +12,6 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.13"
-          architecture: arm64
 
       - name: Install python modules
         run: |
