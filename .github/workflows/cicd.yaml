@@ -36,6 +36,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: tests
     steps:
+      - uses: actions/checkout@v5
+      
       - name: Download code tests result
         uses: actions/download-artifact@v7
         with:
