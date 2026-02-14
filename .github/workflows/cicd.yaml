@@ -29,22 +29,6 @@ jobs:
             --cov-report=xml \
             --cov-report=html \
             --cov-fail-under=30
-      
-      - name: Uploading tests artifacts
-        uses: actions/upload-artifact@v6
-        with:
-          name: test-results
-          path: junit/test-results.xml
-  coverage:
-    runs-on: ubuntu-latest
-    needs: tests
-    steps:
-      
-      - name: Downloading artifacts
-        uses: actions/download-artifact@v6
-        with:
-          name: test-results
-          path: junit/test-results.xml
 
       - name: Coverage report
         uses: orgoro/coverage@v3.2
