@@ -58,6 +58,9 @@ def test_collect_timeout():
         "mongo_history_days": "7"
     })
     db.collection = mock_collection
+    db.timeout = 10000
+    db.mongo_host = "localhost"
+    db.mongo_port = "2701"
 
     result = db.collect()
 
