@@ -1,7 +1,9 @@
 name: CICD
 
 on:
-  - push
+  push:
+  pull_request:
+
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -25,3 +27,24 @@ jobs:
             --cov=app \
             --cov-report=xml:junit/test-results.xml \
             --cov-fail-under=30
+      - name: Upload code tests result
+        uses: actions/upload-artifact@v6
+        with:
+          name: test-results
+          path: junit/test-results.xml
+
+  coverage:
+    runs-on: ubuntu-latest
+    needs: tests
+    steps:
+      - name: Download code tests result
+        uses: actions/download-artifact@v7
+        with:
+          name: test-results
+          path: junit/test-results.xml
+
+      - name: Get Cover 
+        uses: orgoro/coverage@v3.2
+        with:
+          coverageFile: junit/test-results.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
