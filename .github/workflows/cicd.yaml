@@ -27,3 +27,9 @@ jobs:
             --cov-report=xml \
             --cov-report=html \
             --cov-fail-under=30
+      
+      - name: Coverage report
+        uses: orgoro/coverage@v3.2
+        with:
+          coverageFile: junit/test-results.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
