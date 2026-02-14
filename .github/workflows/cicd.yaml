@@ -41,7 +41,10 @@ jobs:
         with:
           name: test-results
           path: tests/test-results.xml
-
+      - name: List dir
+        run: |
+          ls -la
+          find .
       - name: Get Cover 
         uses: orgoro/coverage@v3.2
         with:
