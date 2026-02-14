@@ -27,3 +27,39 @@ def test_collect_ok():
 
     assert result == expected_result
     mock_collection.aggregate.assert_called_once()
+
+def test_collect_operation_failure():
+    mock_collection = Mock()
+    expected_result = []
+
+    mock_collection.aggregate.side_effect = OperationFailure("Error collecting data")
+
+    db = DB({
+        "url": "mongodb://localhost:27017",
+        "timeout": "1000",
+        "mongo_history_days": "7"
+    })
+    db.collection = mock_collection
+
+    result = db.collect()
+
+    assert result == expected_result
+    mock_collection.aggregate.assert_called_once()
+
+def test_collect_timeout():
+    mock_collection = Mock()
+    expected_result = []
+
+    mock_collection.aggregate.side_effect = ServerSelectionTimeoutError("Database connection timed out")
+
+    db = DB({
+        "url": "mongodb://localhost:27017",
+        "timeout": "1000",
+        "mongo_history_days": "7"
+    })
+    db.collection = mock_collection
+
+    result = db.collect()
+
+    assert result == expected_result
+    mock_collection.aggregate.assert_called_once()
