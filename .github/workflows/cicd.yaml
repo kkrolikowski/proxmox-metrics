@@ -26,28 +26,8 @@ jobs:
             --cov=app \
             --cov-report xml:tests/test-results.xml \
             --cov-fail-under=30
-      - name: Upload code tests result
-        uses: actions/upload-artifact@v6
-        with:
-          name: test-results
-          path: tests/test-results.xml
 
-  coverage:
-    runs-on: ubuntu-latest
-    needs: tests
-    steps:
-      - uses: actions/checkout@v5
-      
-      - name: Download code tests result
-        uses: actions/download-artifact@v7
-        with:
-          name: test-results
-          path: tests
-      - name: List dir
-        run: |
-          ls -la
-          find .
-      - name: Get Cover 
+      - name: Tests coverage report
         uses: orgoro/coverage@v3.2
         with:
           coverageFile: tests/test-results.xml
