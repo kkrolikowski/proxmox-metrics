@@ -24,7 +24,7 @@ jobs:
           pip install -r requirements-dev.txt
           pytest \
             --cov=app \
-            --cov-report=xml:tests/test-results.xml \
+            --cov-report xml:tests/test-results.xml \
             --cov-fail-under=30
       - name: Upload code tests result
         uses: actions/upload-artifact@v6
