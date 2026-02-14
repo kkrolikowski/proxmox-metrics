@@ -21,4 +21,4 @@ jobs:
       - name: Perform tests
         run: |
           pip install -r requirements-dev.txt
-          pytest --cov=app --cov-fail-under=30
+          pytest --cov=app --cov-fail-under=40
