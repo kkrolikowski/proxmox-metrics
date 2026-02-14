@@ -1,7 +1,6 @@
 name: CICD
 
 on:
-  push:
   pull_request:
 
 jobs:
@@ -25,13 +24,13 @@ jobs:
           pip install -r requirements-dev.txt
           pytest \
             --cov=app \
-            --cov-report=xml:junit/test-results.xml \
+            --cov-report=xml:tests/test-results.xml \
             --cov-fail-under=30
       - name: Upload code tests result
         uses: actions/upload-artifact@v6
         with:
           name: test-results
-          path: junit/test-results.xml
+          path: tests/test-results.xml
 
   coverage:
     runs-on: ubuntu-latest
@@ -41,7 +40,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: test-results
-          path: junit/test-results.xml
+          path: tests/test-results.xml
 
       - name: Get Cover 
         uses: orgoro/coverage@v3.2
