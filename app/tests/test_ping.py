@@ -56,5 +56,3 @@ def test_ping_timeout():
 
     assert result is None
     mock_db.command.assert_called_once_with("ping")
-
-
