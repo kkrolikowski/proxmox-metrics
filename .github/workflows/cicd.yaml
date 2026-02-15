@@ -25,7 +25,7 @@ jobs:
           pytest \
             --cov=app \
             --cov-report xml:tests/test-results.xml \
-            --cov-fail-under=30
+            --cov-fail-under=50
 
       - name: Tests coverage report
         uses: orgoro/coverage@v3.2
