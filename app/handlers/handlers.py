@@ -4,9 +4,8 @@ import logging
 from aiohttp import web
 from prometheus_client import generate_latest
 
-from parsers.proxmox_report import ProxmoxReport
-from metrics.prometheus import Prometheus
-from db.mongo import DB
+from app.parsers.proxmox_report import ProxmoxReport
+from app.metrics.prometheus import Prometheus
 
 logging.getLogger(__name__)
 
