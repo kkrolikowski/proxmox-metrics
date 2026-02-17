@@ -47,8 +47,8 @@ class DB:
       self.mongo_port = m.group(2)
       
       self.connection = conf["url"]
-      self.timeout = conf["timeout"]
-      self.daysold = conf["mongo_history_days"]
+      self.timeout = int(conf["timeout"])
+      self.daysold = int(conf["mongo_history_days"])
 
       self.client = MongoClient(self.connection, timeoutMS=self.timeout)
       self.db = self.client[os.path.basename(self.connection)]
