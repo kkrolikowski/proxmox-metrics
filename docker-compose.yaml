@@ -1,6 +1,8 @@
 services:
   proxmox-metrics:
-    build: .
+    # Uncomment for local development and testing
+    #build: .
+    image: ghcr.io/kkrolikowski/proxmox-metrics:latest
     restart: always
     environment:
       MONGO_URL: ${MONGO_URL}
