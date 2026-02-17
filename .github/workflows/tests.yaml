@@ -1,4 +1,4 @@
-name: CICD
+name: Code tests
 
 on:
   pull_request:
